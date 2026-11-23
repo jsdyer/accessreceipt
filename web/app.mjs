@@ -1,4 +1,4 @@
-import {parseReceipt, normalizeReceipt, findings, compareReceipts, receiptSummary, findingsCSV, MAX_IMPORT_BYTES} from './model.mjs';
+import {parseReceipt, normalizeReceipt, findings, compareReceipts, receiptSummary, findingsCSV, MAX_IMPORT_BYTES} from './model.mjs?v=coverage-2';
 const $ = id => document.getElementById(id);
 const store = new Map();
 let current = null, baseline = null, view = 'violations', visible = 60, selection = 0, currentId = '', baselineId = '';
@@ -65,6 +65,8 @@ function renderScope() {
     if (page.status === 'success') card.append(el('p', `${page.violations.length} rules with findings · ${page.incomplete.length} need review${page.passedRules !== null ? ` · ${page.passedRules} passed` : ''}`));
     else card.append(el('p', page.error));
     if (page.network?.blocked || page.network?.failed) card.append(el('p', `${page.network.blocked} blocked requests · ${page.network.failed} failed or HTTP-error responses. Some content may not have loaded.`));
+    if (page.coverage.status === 'degraded') card.append(el('p', `Excluded from changes: ${page.coverage.criticalFailures} critical read requests failed, ${page.coverage.pendingCritical} still pending${page.coverage.budgetExhausted ? ', request budget exhausted' : ''}. Findings describe the rendered content only.`, 'coverage-note'));
+    else if (page.coverage.status === 'unknown') card.append(el('p', 'Read-resource coverage was not recorded. Findings remain available; this page is excluded from changes.', 'coverage-note'));
     if (page.finalURL && page.finalURL !== page.requestedURL) card.append(el('p', `Final URL: ${page.finalURL}`));
     return card;
   }));
@@ -113,7 +115,7 @@ function renderFindings() {
   const note = $('comparison-note'); note.hidden = view !== 'changes';
   if (view === 'changes') {
     const comparison = compareReceipts(current, baseline);
-    note.textContent = comparison.reason || `${comparison.comparablePages.length} comparable pages · ${comparison.introduced.length} introduced · ${comparison.resolved.length} no longer observed · ${comparison.unchanged.length} still observed · ${comparison.review.length} now need review. ${comparison.unassessed.length ? `${comparison.unassessed.length} changed, missing or failed pages are unassessed. ` : ''}“No longer observed” means the earlier rule/selector pair was not found again, not that the page is accessible.`;
+    note.textContent = comparison.reason || `${comparison.comparablePages.length} comparable pages · ${comparison.introduced.length} introduced · ${comparison.resolved.length} no longer observed · ${comparison.unchanged.length} still observed · ${comparison.review.length} now need review. ${comparison.unassessed.length ? `${comparison.unassessed.length} changed, missing, failed or incomplete-coverage pages are unassessed. ` : ''}“No longer observed” means the earlier rule/selector pair was not found again, not that the page is accessible.`;
   }
   const rows = getRows();
   $('result-count').textContent = `${rows.length} locations`;

@@ -60,3 +60,11 @@ test('findings use stable target identities, counts deduplicate and CSV blocks s
 test('raw successful reports cannot omit incomplete results', () => {
   assert.throws(()=>normalizeReceipt({testEngine:{name:'axe-core',version:'4.14.1'},timestamp:'2026-01-01',url:'https://example.com/',violations:[]}));
 });
+
+test('degraded or unknown read-resource coverage never produces false resolutions', () => {
+  const before=receipt();
+  for(const coverage of [undefined,{status:'complete',budgetExhausted:false,criticalFailures:1,pendingCritical:0},{budgetExhausted:true,criticalFailures:0,pendingCritical:0},{budgetExhausted:false,criticalFailures:0,pendingCritical:1}]) {
+    const after=receipt({pages:[{...before.pages[0],violations:[],network:{requests:5,blocked:0,failed:1},coverage}]});
+    const diff=compareReceipts(after,before);assert.equal(diff.resolved.length,0);assert.equal(diff.comparablePages.length,0);assert.equal(diff.unassessed.length,1);assert.ok(diff.reason);
+  }
+});

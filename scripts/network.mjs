@@ -17,7 +17,11 @@ export function validatePublicURL(value) {
   const host = url.hostname.replace(/^\[|\]$/g, '').toLowerCase();
   if (!host || host === 'localhost' || host.endsWith('.localhost') || /\.(local|internal|lan|home|test|invalid)$/.test(host) || (!net.isIP(host) && !host.includes('.'))) throw new Error('Local and private hostnames cannot be scanned.');
   if (net.isIP(host) && !isPublicAddress(host)) throw new Error('Private, reserved and local addresses cannot be scanned.');
-  if ([...url.searchParams.keys()].some(key => /^(access_token|api_key|apikey|token|password|secret|authorization|auth)$/i.test(key))) throw new Error('Remove credentials and access tokens from the page URL.');
+  if ([...url.searchParams.keys()].some(key => {
+    const normalized = key.toLowerCase().replace(/[^a-z0-9]/g, '');
+    return /^(?:.*token|.*password|.*secret|.*signature|.*credential|.*sessid|key|apikey|accesskey|secretaccesskey|authorization|auth|sig|keypairid|sessionid|sessionkey|jwt|oauthcode|code)$/.test(normalized)
+      || normalized.startsWith('xamz') || normalized.startsWith('xgoog');
+  })) throw new Error('Remove credentials, signed-link parameters and access tokens from the page URL.');
   url.hash = '';
   return url;
 }
@@ -28,32 +32,62 @@ export async function resolvePublic(hostname, lookup = dns.lookup) {
   return addresses[0];
 }
 
+// Kept separate so the lifecycle can be checked without opening network sockets.
+export function createResourceTracker() {
+  const resources = new Set();
+  let closed = false;
+  return {
+    track(resource) {
+      if (closed) { resource.destroy(); return; }
+      if (resources.has(resource)) return;
+      resources.add(resource); resource.once('close', () => resources.delete(resource));
+    },
+    close() { closed = true; for (const resource of resources) resource.destroy(); resources.clear(); }
+  };
+}
+export function trackHTTPExchange(request, response, upstream, track) {
+  track(upstream);
+  let incoming;
+  const abort = () => { incoming?.destroy(); upstream.destroy(); };
+  upstream.on('socket', socket => track(socket));
+  upstream.once('response', body => { incoming = body; track(body); body.once('error', () => response.destroy()); });
+  request.once('aborted', abort);
+  response.once('close', abort);
+  upstream.once('timeout', abort);
+}
+
 // Every socket goes to the checked IP, not a second DNS lookup. This also covers
 // browser redirects/subresources and prevents DNS rebinding into a private network.
 export async function createPublicProxy() {
   const sockets = new Set();
+  const outgoing = createResourceTracker();
+  let closing = false;
+  const track = resource => outgoing.track(resource);
   const server = http.createServer(async (request, response) => {
     try {
       if (!['GET', 'HEAD'].includes(request.method)) throw new Error('Only read requests are permitted.');
       const url = validatePublicURL(request.url);
       if (url.protocol !== 'http:') throw new Error('Use CONNECT for TLS.');
       const address = await resolvePublic(url.hostname);
+      if (closing || request.aborted || response.destroyed) return;
       const headers = {...request.headers, host: url.host};
       delete headers['proxy-authorization']; delete headers['proxy-connection'];
-      const upstream = http.request({host: address.address, port: Number(url.port) || 80,
+      const upstream = http.request({host: address.address, port: Number(url.port) || 80, agent: false,
         family: address.family, method: request.method, path: url.pathname + url.search, headers, timeout: 20000}, incoming => {
+        if (response.destroyed || closing) { incoming.destroy(); return; }
         response.writeHead(incoming.statusCode, incoming.headers); incoming.pipe(response);
       });
-      upstream.on('timeout', () => upstream.destroy());
-      upstream.on('error', () => { if (!response.headersSent) response.writeHead(502); response.end(); });
+      trackHTTPExchange(request, response, upstream, track);
+      upstream.on('error', () => { if (response.destroyed) return; if (!response.headersSent) response.writeHead(502); response.end(); });
       request.pipe(upstream);
-    } catch { response.writeHead(403); response.end('Destination blocked by public-page policy.'); }
+    } catch { if (!response.destroyed) { response.writeHead(403); response.end('Destination blocked by public-page policy.'); } }
   });
   server.on('connect', async (request, socket, head) => {
     try {
       const url = validatePublicURL(`https://${request.url}/`);
       if ((Number(url.port) || 443) !== 443) throw new Error('Only TLS port 443 is supported.');
       const address = await resolvePublic(url.hostname);
+      if (closing || socket.destroyed) return;
       const upstream = net.connect({host: address.address, family: address.family, port: 443});
       sockets.add(upstream);
       upstream.setTimeout(35000, () => upstream.destroy());
@@ -71,6 +105,8 @@ export async function createPublicProxy() {
   server.on('connection', socket => { sockets.add(socket); socket.on('close', () => sockets.delete(socket)); });
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   return {url: `http://127.0.0.1:${server.address().port}`, close: async () => {
+    closing = true;
+    outgoing.close();
     for (const socket of sockets) socket.destroy();
     await new Promise(resolve => server.close(resolve));
   }};

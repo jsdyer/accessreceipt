@@ -11,6 +11,13 @@ export function safeURL(value) {
   } catch { return ''; }
 }
 const strings = (value, limit = 100) => Array.isArray(value) ? value.slice(0, limit).filter(v => typeof v === 'string').map(v => text(v, 500)) : [];
+function cleanCoverage(value) {
+  if (!value || typeof value.budgetExhausted !== 'boolean'
+      || !Number.isSafeInteger(value.criticalFailures) || value.criticalFailures < 0
+      || !Number.isSafeInteger(value.pendingCritical) || value.pendingCritical < 0) return {status: 'unknown'};
+  return {status: value.budgetExhausted || value.criticalFailures || value.pendingCritical ? 'degraded' : 'complete',
+    budgetExhausted: value.budgetExhausted, criticalFailures: value.criticalFailures, pendingCritical: value.pendingCritical};
+}
 function target(value, depth = 0) {
   if (!Array.isArray(value)) return [];
   if (depth > 8 || value.length > 100 || value.some(v => typeof v === 'string' && v.length > 10000)) throw new Error('An element target exceeds the report size limits.');
@@ -64,6 +71,7 @@ export function normalizeReceipt(input) {
     return {requestedURL, finalURL: safeURL(page.finalURL), label: text(page.label || requestedURL, 250),
       status, scannedAt: text(page.scannedAt, 100), error: status === 'error' ? text(page.error || 'The page could not be checked.', 500) : '',
       network: page.network && typeof page.network === 'object' ? Object.fromEntries(['requests','blocked','failed'].map(key => [key, Number.isSafeInteger(page.network[key]) && page.network[key] >= 0 ? page.network[key] : 0])) : null,
+      coverage: cleanCoverage(page.coverage),
       violations: status === 'success' ? cleanRules(page.violations) : [], incomplete: status === 'success' ? cleanRules(page.incomplete) : [],
       passedRules: Number.isInteger(page.passedRules) && page.passedRules >= 0 ? page.passedRules : null,
       inapplicableRules: Number.isInteger(page.inapplicableRules) && page.inapplicableRules >= 0 ? page.inapplicableRules : null};
@@ -97,7 +105,8 @@ export function compareReceipts(current, previous) {
   const newer = new Map(current.pages.map(page => [page.requestedURL, page]));
   for (const url of new Set([...older.keys(), ...newer.keys()])) {
     const a = newer.get(url), b = older.get(url);
-    if (!a || !b || a.status !== 'success' || b.status !== 'success' || a.finalURL !== b.finalURL) {
+    if (!a || !b || a.status !== 'success' || b.status !== 'success' || a.finalURL !== b.finalURL
+        || a.coverage?.status !== 'complete' || b.coverage?.status !== 'complete') {
       result.unassessed.push(url); continue;
     }
     result.comparablePages.push(url);
@@ -108,7 +117,7 @@ export function compareReceipts(current, previous) {
   const unsure = new Set(findings(current, 'incomplete').map(row => row.key));
   for (const [key, row] of a) (b.has(key) ? result.unchanged : result.introduced).push(row);
   for (const [key, row] of b) if (!a.has(key)) (unsure.has(key) ? result.review : result.resolved).push(row);
-  result.reason = result.comparablePages.length ? '' : 'No page was successfully checked at the same requested and final URL in both captures.';
+  result.reason = result.comparablePages.length ? '' : 'No page has matching requested/final URLs and confirmed read-resource coverage in both captures. Failed, degraded or older unknown-coverage pages cannot establish changes.';
   return result;
 }
 export function receiptSummary(receipt) {

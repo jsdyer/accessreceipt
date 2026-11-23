@@ -5,6 +5,7 @@ import {createRequire} from 'node:module';
 import {chromium} from 'playwright';
 import {FORMAT, MAX_IMPORT_BYTES, normalizeReceipt} from '../web/model.mjs';
 import {createPublicProxy, validatePublicURL} from './network.mjs';
+import {createCoverageTracker} from './coverage.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const require = createRequire(import.meta.url);
@@ -12,7 +13,9 @@ const axePath = require.resolve('axe-core/axe.min.js');
 const axeVersion = require('axe-core/package.json').version;
 const config = JSON.parse(await fs.readFile(path.join(root, 'web/config.json'), 'utf8'));
 const manual = (process.env.ACCESSRECEIPT_URLS || '').trim();
-const pages = manual ? manual.split(/[\n,]+/).map(url => ({url: url.trim(), label: url.trim()})).filter(p => p.url) : config.pages;
+// Manual labels fall back to the validated URL below, never the raw input (which
+// may contain a discarded fragment such as an OAuth token).
+const pages = manual ? manual.split(/[\n,]+/).map(url => ({url: url.trim()})).filter(p => p.url) : config.pages;
 if (!Array.isArray(pages) || !pages.length || pages.length > Math.min(config.maxPagesPerRun || 20, 20)) throw new Error('Configure between 1 and 20 public pages per run.');
 const urls = new Set();
 for (const page of pages) {
@@ -39,18 +42,23 @@ try {
     let requests = 0;
     let policyBlocked = 0;
     let failedRequests = 0;
-    context.on('requestfailed', () => failedRequests++);
-    context.on('response', response => { if (response.status() >= 400) failedRequests++; });
+    let observing = true;
+    const coverage = createCoverageTracker();
+    context.on('request', request => coverage.started(request));
+    context.on('requestfinished', request => coverage.finished(request));
+    context.on('requestfailed', request => { if (observing) failedRequests++; coverage.failed(request); });
+    context.on('response', response => { if (observing && response.status() >= 400) { failedRequests++; coverage.httpError(response.request()); } });
     await context.route('**/*', async route => {
+      const request = route.request();
+      let reason = 'policy';
       try {
-        if (++requests > requestLimit) throw new Error('Request budget exceeded.');
-        const request = route.request();
-        if (!['GET', 'HEAD'].includes(request.method())) throw new Error('Only public read requests are permitted.');
+        if (++requests > requestLimit) { reason = 'budget'; throw new Error('Request budget exceeded.'); }
+        if (!['GET', 'HEAD'].includes(request.method())) { reason = 'non-read'; throw new Error('Only public read requests are permitted.'); }
         validatePublicURL(request.url());
         let predecessor = request.redirectedFrom(), redirects = 0;
         while (predecessor) { if (++redirects > 10) throw new Error('Too many redirects.'); predecessor = predecessor.redirectedFrom(); }
         await route.continue();
-      } catch { policyBlocked++; await route.abort('blockedbyclient'); }
+      } catch { if (observing) policyBlocked++; coverage.blocked(request, reason); await route.abort('blockedbyclient'); }
     });
     await context.routeWebSocket('**/*', socket => socket.close());
     try {
@@ -75,7 +83,11 @@ try {
       // Avoid publishing browser traces, response bodies or request parameters.
       record.error = error.message.startsWith('The page returned HTTP') ? error.message : 'The public page could not be checked (network, policy, timeout or browser error). Run the workflow again or inspect the page directly.';
       console.log(`Page ${receipt.pages.length + 1} (${new URL(item.url).hostname}): check unavailable.`);
-    } finally { await context.close(); }
+    } finally {
+      record.coverage = coverage.finish();
+      observing = false;
+      await context.close();
+    }
     record.network = {requests, blocked: policyBlocked, failed: failedRequests};
     receipt.pages.push(record);
   }

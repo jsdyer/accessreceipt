@@ -16,3 +16,8 @@ test('a mixed public/private DNS answer is rejected; returned address is pinned 
   assert.deepEqual(answer,{address:'8.8.8.8',family:4}); assert.equal(calls,1);
   await assert.rejects(()=>resolvePublic('example.com',async()=>[]));
 });
+
+test('signed and common credential query names are rejected on any scanned URL', () => {
+  for (const query of ['X-Amz-Signature=secret&X-Amz-Credential=secret','X-Goog-Signature=secret','sig=secret','accessToken=secret','api-key=secret','session_id=secret','id_token=secret','clientSecret=secret','key=secret','PHPSESSID=secret','code=secret']) assert.throws(()=>validatePublicURL(`https://example.com/?${query}`));
+  assert.equal(validatePublicURL('https://example.com/?search=legislation&year=2026').search,'?search=legislation&year=2026');
+});
