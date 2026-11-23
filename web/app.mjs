@@ -1,4 +1,4 @@
-import {parseReceipt, normalizeReceipt, findings, compareReceipts, receiptSummary, findingsCSV, MAX_IMPORT_BYTES} from './model.mjs?v=coverage-2';
+import {parseReceipt, normalizeReceipt, findings, compareReceipts, receiptSummary, findingsCSV, MAX_IMPORT_BYTES} from './model.mjs?v=counts-3';
 const $ = id => document.getElementById(id);
 const store = new Map();
 let current = null, baseline = null, view = 'violations', visible = 60, selection = 0, currentId = '', baselineId = '';
@@ -80,6 +80,8 @@ function render() {
   const total = receiptSummary(current);
   $('checked').textContent = `${total.checked}/${total.pages}`; $('violations').textContent = total.violations;
   $('review').textContent = total.review; $('rules').textContent = total.rules;
+  const affected = current.pages.filter(page => page.status === 'success' && page.violations.length);
+  $('summary-explanation').textContent = `${total.violations} flagged element locations across ${total.rules} rule ${total.rules === 1 ? 'type' : 'types'}. One repeated component can produce many locations.${affected.length === 1 ? ` All flagged locations are on ${affected[0].label}.` : ''} The ${total.review} locations needing review require human judgement; they are not confirmed failures.`;
   $('capture-meta').textContent = `Captured ${date(current.capturedAt)} · axe-core ${current.engine.version}`;
   renderScope(); renderFindings();
 }

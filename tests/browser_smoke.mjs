@@ -34,6 +34,8 @@ try {
     await page.goto(base,{waitUntil:'networkidle'});
     await page.locator('#loaded').waitFor({state:'visible'});
     assert.equal(await page.locator('#violations').textContent(),'2');
+    assert.match(await page.locator('#summary-explanation').textContent(), /2 flagged element locations across 2 rule types/);
+    assert.match(await page.locator('#summary-explanation').textContent(), /not confirmed failures/);
     await page.locator('#baseline').selectOption('captures/previous.json');
     await page.getByRole('button',{name:'Changes',exact:true}).click();
     await page.getByText('Introduced',{exact:true}).waitFor();
