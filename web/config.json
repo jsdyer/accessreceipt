@@ -1,0 +1,14 @@
+{
+  "pages": [
+    {"url": "https://coolcode.ca/", "label": "CoolCode catalogue"},
+    {"url": "https://coolcode.ca/civiclookup/", "label": "Civic Lookup"},
+    {"url": "https://coolcode.ca/streamatlas/", "label": "Stream Atlas"}
+  ],
+  "viewport": {"width": 1280, "height": 900},
+  "tags": ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-practice"],
+  "settleMilliseconds": 1500,
+  "navigationTimeoutMilliseconds": 25000,
+  "maxPagesPerRun": 20,
+  "maxNetworkRequestsPerPage": 600,
+  "historyLimit": 104
+}

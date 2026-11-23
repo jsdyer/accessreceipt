@@ -1,16 +1,13 @@
 {
-  "id": "coolcode-tool-template",
-  "title": "CoolCode Tool Starter",
-  "description": "A browser-only example that trims lines and removes exact duplicates.",
+  "id": "accessreceipt",
+  "title": "Access Receipt",
+  "description": "Inspect dated accessibility findings, compare changes and keep the evidence.",
   "category": "security",
-  "tags": ["text", "lines", "duplicates"],
+  "tags": ["accessibility", "axe-core", "evidence", "websites"],
   "icon": "scan-search",
-  "url": "/coolcode-tool-template/",
-  "source": "https://github.com/jsdyer/coolcode-tool-template",
+  "url": "/accessreceipt/",
+  "source": "https://github.com/jsdyer/accessreceipt",
   "hosting": "project",
   "access": "browser",
-  "data_info": {
-    "mode": "local",
-    "detail": "The browser reads the text you paste and compares its lines."
-  }
+  "data_info": {"mode": "mixed", "detail": "Weekly axe-core checks of configured public pages, with local import of your own axe reports."}
 }

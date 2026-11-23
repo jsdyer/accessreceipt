@@ -1,17 +1,27 @@
-name: Browser tool · Check and publish
+name: Access Receipt · Check, capture and publish
 on:
   pull_request:
   push:
     branches: [main]
+  schedule:
+    - cron: '39 7 * * 2'
   workflow_dispatch:
+    inputs:
+      urls:
+        description: 'Optional: public URLs you own or are authorized to test, separated by commas. Leave blank for web/config.json.'
+        required: false
+        type: string
 permissions:
   contents: read
+concurrency:
+  group: accessreceipt-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    outputs:
-      publish: ${{ steps.identity.outputs.publish }}
+    timeout-minutes: 25
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v6
         with:
@@ -22,30 +32,23 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
-      - name: Test the application
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Test receipt handling, comparison and network policy
         run: node --test tests/*.test.mjs
       - name: Test the builder
         run: python3 -m unittest discover -s tests -v
+      - name: Install Chromium for capture and browser checks
+        run: npx playwright install --with-deps chromium
+      - name: Capture configured or requested public pages
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          ACCESSRECEIPT_URLS: ${{ inputs.urls }}
+        run: node scripts/collect.mjs
       - name: Build the static application
         run: python3 scripts/build.py
-      - name: Check whether the tool has been initialized
-        id: identity
-        env:
-          REPOSITORY_NAME: ${{ github.event.repository.name }}
-        run: |
-          python3 - <<'PY'
-          import json, os
-          tool_id = json.load(open('tool.json'))['id']
-          ready = tool_id != 'coolcode-tool-template' and tool_id == os.environ['REPOSITORY_NAME']
-          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
-              output.write(f'publish={str(ready).lower()}\n')
-          PY
-      - name: Install browser test dependencies
-        run: |
-          python3 -m pip install -r tests/browser-requirements.txt
-          python3 -m playwright install --with-deps chromium
-      - name: Check application in a browser
-        run: python3 tests/browser_smoke.py
+      - name: Check the viewer in Chromium
+        run: node tests/browser_smoke.mjs
       - name: Save browser screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -53,26 +56,36 @@ jobs:
           name: browser-checks
           path: browser-checks/
           retention-days: 7
+      - name: Retain dated captures in the repository
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          git add web/data
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Retain dated accessibility receipt'
+          AUTH=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $AUTH" push "https://github.com/$REPOSITORY.git" HEAD:main
       - name: Save reviewable site
         uses: actions/upload-artifact@v4
         with:
-          name: browser-tool-preview
+          name: accessreceipt-preview
           path: dist/
           include-hidden-files: true
           retention-days: 7
       - name: Package Pages site
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && steps.identity.outputs.publish == 'true'
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v4
         with:
           path: dist
   deploy:
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.build.outputs.publish == 'true'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    concurrency:
-      group: github-pages
-      cancel-in-progress: false
     permissions:
       pages: write
       id-token: write
