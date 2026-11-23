@@ -2,6 +2,12 @@
   "format": "coolcode-accessreceipt-index-v1",
   "captures": [
     {
+      "path": "captures/2026-11-23T09-07-16-077Z.json",
+      "capturedAt": "2026-11-23T09:07:16.077Z",
+      "pages": 3,
+      "checked": 3
+    },
+    {
       "path": "captures/2026-11-23T08-34-30-697Z.json",
       "capturedAt": "2026-11-23T08:34:30.697Z",
       "pages": 3,
