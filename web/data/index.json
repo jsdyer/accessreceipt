@@ -1,1 +1,11 @@
-{"format":"coolcode-accessreceipt-index-v1","captures":[]}
+{
+  "format": "coolcode-accessreceipt-index-v1",
+  "captures": [
+    {
+      "path": "captures/2026-11-23T08-23-32-258Z.json",
+      "capturedAt": "2026-11-23T08:23:32.258Z",
+      "pages": 3,
+      "checked": 3
+    }
+  ]
+}
