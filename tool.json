@@ -3,11 +3,20 @@
   "title": "Access Receipt",
   "description": "Inspect dated accessibility findings, compare changes and keep the evidence.",
   "category": "security",
-  "tags": ["accessibility", "axe-core", "evidence", "websites"],
+  "tags": [
+    "accessibility",
+    "axe-core",
+    "evidence",
+    "websites"
+  ],
   "icon": "scan-search",
   "url": "/accessreceipt/",
   "source": "https://github.com/jsdyer/accessreceipt",
   "hosting": "project",
   "access": "browser",
-  "data_info": {"mode": "mixed", "detail": "Weekly axe-core checks of configured public pages, with local import of your own axe reports."}
+  "data_info": {
+    "mode": "mixed",
+    "detail": "Weekly axe-core checks of configured public pages, with local import of your own axe reports.",
+    "cadence": "Weekly"
+  }
 }
