@@ -1,0 +1,1725 @@
+{
+  "format": "coolcode-accessreceipt-v1",
+  "capturedAt": "2026-11-24T09:42:18.607Z",
+  "engine": {
+    "name": "axe-core",
+    "version": "4.14.1"
+  },
+  "profile": {
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "tags": [
+      "best-practice",
+      "wcag21a",
+      "wcag21aa",
+      "wcag22aa",
+      "wcag2a",
+      "wcag2aa"
+    ],
+    "scope": "document",
+    "settleMilliseconds": 1500,
+    "browser": "Chromium 159.0.8154.6",
+    "policy": "public-read-v1",
+    "requestLimit": 600
+  },
+  "importedRaw": false,
+  "pages": [
+    {
+      "requestedURL": "https://coolcode.ca/",
+      "finalURL": "https://coolcode.ca/",
+      "label": "CoolCode catalogue",
+      "status": "success",
+      "scannedAt": "2026-11-24T09:42:21.079Z",
+      "error": "",
+      "network": {
+        "requests": 13,
+        "blocked": 4,
+        "failed": 4
+      },
+      "coverage": {
+        "status": "complete",
+        "budgetExhausted": false,
+        "criticalFailures": 0,
+        "pendingCritical": 0
+      },
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "impact": "serious",
+          "description": "Ensure ARIA attributes are not prohibited for an element's role",
+          "help": "Elements must only use permitted ARIA attributes",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/aria-prohibited-attr?application=axeAPI",
+          "tags": [
+            "cat.aria",
+            "wcag2a",
+            "wcag412",
+            "EN-301-549",
+            "EN-9.4.1.2",
+            "RGAAv4",
+            "RGAA-7.1.1"
+          ],
+          "nodes": [
+            {
+              "target": [
+                "pre"
+              ],
+              "impact": "serious"
+            }
+          ]
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "nodes": [
+            {
+              "target": [
+                "#theme"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".byline"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "#hero-title"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "em"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".intro"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".primary"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".primary > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".code-link[href$=\"#install\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".code-link[href$=\"#install\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".tty-top > span:nth-child(1)"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".tty-top > span:nth-child(2)"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".login"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".glass > div:nth-child(3)"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "div:nth-child(3) > b"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".glass > div:nth-child(4)"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".glass > div:nth-child(5)"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".indent"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".result"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".chin > span"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "figcaption"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "#homelab-heading"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".code-link[href$=\"#workbench\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".code-link[href$=\"#workbench\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[data-featured-tool=\"nightfinder\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[data-featured-tool=\"eventradar\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[data-featured-tool=\"dnslens\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[data-featured-tool=\"atip\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"rack-recipes/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"archive-shelf/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"drivecohort/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"rackexpiry/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"apiarchaeology/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"queryplan/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"packagepulse/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"rfctrail/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"translationdesk/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"diagrambench/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"composediff/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"mimecabinet/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".tool-entry > a[href$=\"dnslens/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"ipsnapshot/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"certtrail/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"domain-biography/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"renewalboard/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"routearchaeologist/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"rpkiguard/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"outagescope/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"broadbandatlas/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"telecompulse/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"onionpulse/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"blockedorgone/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"packet-detour/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"protocol-cabinet/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"prefixdiary/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"signalwalk/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"lastmilepercentile/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"spectrum-explorer/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"asn-canada/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"rangeledger/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"grid-dark/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"gc-subdomain-watch/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"ix-ledger/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"boomerang-meter/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"colocheck/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"hosted-where/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"maplehosting/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"ispreportcard/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"anycastcompass/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"radarscope/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"statusledger/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"atlas-canada/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"edge-map/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"trackerxray/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"headerautopsy/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"mailpath/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"packetpocket/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"dependencyxray/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"exploitgraveyard/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"patchsignal/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"fraudpulse/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"registrarwatch/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"scamtrace/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"abusepulse/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"phishintel/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"govtrackercensus/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"maplephish/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"shieldcheck/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"scanreceipt/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"govgrade/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"pwncheck-kanon/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"malwarelineage/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"accessreceipt/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"takedown-watcher/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"abuse-kit/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".tool-entry > a[href$=\"atip/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"governmentmemory/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"briefings/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"evidencelab/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"atippopularity/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"atipmetrics/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"ministersays/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"wrongdoings/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"algorithmwatch/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"datasetexplorer/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"opendatagraveyard/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"canadaanalytics/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"salmonlines/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"datasetdiff/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"crossingrecord/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"parkvisits/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"auroratrace/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"masspeaks/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"committeereceipt/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"paperchequetrail/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"sameflight/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"census-lens/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"ccts-ledger/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"pipeda-findings/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"gridreceipt/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"atipdecisions/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"oicdiary/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"lawdelta/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"govdatagaps/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"researchledger/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"civiclookup/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"corporateghosts/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"lobbytrail/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"charityflows/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"tariffxray/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"gearautopsy/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"recallradar/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"patentattic/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"spillledger/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"bridgeledger/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"dispatchledger/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"cloud-ledger/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"contractpatterns/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"donationradar/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"sanctionsledger/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"trailglass/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"weatherarchive/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"spectrumatlas/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"shipwrecks/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"forgottenplaces/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"namesforget/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"bcplacenames/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"hiddenwater/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"halifaxtimelens/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"langleychanges/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"langleytrades/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"highwayframe/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"violationsheet/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"strangeskies/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"lightkeeper/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"stormtracks/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"clamground/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"ferrycountss/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"welllayers/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"campcalendar/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"snowcourses/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"coalbelow/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"iceweeks/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"ferryrecord/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"schoolhouseledger/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"libraryworkbench/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"shopfrontdiary/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"transferwindow/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"seabusclock/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"streetworkdiary/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"routemirror/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"postmarkplaces/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"lakeprofiles/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"forecastreceipt/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"fossilneighbours/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"airpair/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"plumediary/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"quakeecho/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"donairafterdark/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"lastrefill/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"federal-property-atlas/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"toxic-ground/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"surplus-crown/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"transitreceipt/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"tidereceipt/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"borderpulse/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"mushroomcalendar/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"dawnchorus/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"museumdrawer/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"hotspotledger/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"marinenames/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"roadpulse/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"riverpulse/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"dockdiary/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"buoybench/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"chargegaps/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"magneticnorth/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"restroomreach/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"holidayclock/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"translink/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".tool-entry > a[href$=\"nightfinder/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"satpasses/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"skyarchive/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"nasa/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"photolab/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"otherworldnames/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"sunledger/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"planetpapers/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"flybyfiles/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"chirproom/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"tide-and-dark/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"launchledger/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"platesolvelab/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"orbitalcensus/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"flightweather/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"fireballledger/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"bankrates/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"priceatlas/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"insolvencyatlas/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"marketshadows/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"pantryprices/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"metermath/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"inflation-basket/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"housing-pulse/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"releasereceipt/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"scorecard/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"exportneighbours/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"metroeconomy/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"filingdelta/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"fxreceipt/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"labelcompare/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                ".tool-entry > a[href$=\"eventradar/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"atlanticdial/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"screenradar/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"mediaechoes/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"ghostlinks/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"lostcode/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"unreleased/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"aircheckdiary/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"cancon-atlas/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"freenet-echo/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"gc-domain-graveyard/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"arttimeline/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"headlinevault/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"oldnews-oddities/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"streamatlas/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"bookgraveyard/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"formatshift/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"ephemeraatlas/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"commonslens/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            },
+            {
+              "target": [
+                "a[href$=\"wordweave/\"] > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            }
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+          "help": "Elements must have their visible text as part of their accessible name",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=axeAPI",
+          "tags": [
+            "cat.semantics",
+            "wcag21a",
+            "wcag253",
+            "EN-301-549",
+            "EN-9.2.5.3",
+            "RGAAv4",
+            "RGAA-6.1.5"
+          ],
+          "nodes": [
+            {
+              "target": [
+                "#theme"
+              ],
+              "impact": "serious"
+            }
+          ]
+        }
+      ],
+      "passedRules": 46,
+      "inapplicableRules": 45
+    },
+    {
+      "requestedURL": "https://coolcode.ca/civiclookup/",
+      "finalURL": "https://coolcode.ca/civiclookup/",
+      "label": "Civic Lookup",
+      "status": "success",
+      "scannedAt": "2026-11-24T09:42:25.338Z",
+      "error": "",
+      "network": {
+        "requests": 11,
+        "blocked": 1,
+        "failed": 1
+      },
+      "coverage": {
+        "status": "complete",
+        "budgetExhausted": false,
+        "criticalFailures": 0,
+        "pendingCritical": 0
+      },
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "nodes": [
+            {
+              "target": [
+                ".aside-note > span[aria-hidden=\"true\"]"
+              ],
+              "impact": "serious"
+            }
+          ]
+        }
+      ],
+      "passedRules": 40,
+      "inapplicableRules": 51
+    },
+    {
+      "requestedURL": "https://coolcode.ca/streamatlas/",
+      "finalURL": "https://coolcode.ca/streamatlas/",
+      "label": "Stream Atlas",
+      "status": "success",
+      "scannedAt": "2026-11-24T09:42:27.547Z",
+      "error": "",
+      "network": {
+        "requests": 12,
+        "blocked": 1,
+        "failed": 1
+      },
+      "coverage": {
+        "status": "complete",
+        "budgetExhausted": false,
+        "criticalFailures": 0,
+        "pendingCritical": 0
+      },
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "nodes": [
+            {
+              "target": [
+                ".player-icon"
+              ],
+              "impact": "serious"
+            }
+          ]
+        }
+      ],
+      "passedRules": 43,
+      "inapplicableRules": 48
+    }
+  ]
+}
