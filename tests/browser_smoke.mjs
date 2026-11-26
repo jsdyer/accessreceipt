@@ -58,6 +58,11 @@ try {
     await page.getByRole('heading',{name:'<img src=x onerror=alert(1)>'}).waitFor();assert.equal(await page.locator('.finding-card img').count(),0);
     await page.locator('#import-file').setInputFiles({name:'bad.json',mimeType:'application/json',buffer:Buffer.from('{')});
     await page.getByText(/not valid JSON/).waitFor();assert.equal(await page.locator('#violations').textContent(),'1');
+    const reviewOnly=receipt({date:'2026-01-04',violations:[],incomplete:[rule('color-contrast','#review','moderate')]});
+    await page.locator('#import-file').setInputFiles({name:'review.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(reviewOnly))});
+    await page.waitForFunction(()=>document.getElementById('tab-incomplete').getAttribute('aria-pressed')==='true');
+    assert.equal(await page.locator('#violations').textContent(),'0');
+    assert.equal(await page.locator('#finding-list .finding-card').count(),1);
     assert.deepEqual(errors,[]);await page.close();
   }
 } finally {await browser.close();await new Promise(resolve=>server.close(resolve));}

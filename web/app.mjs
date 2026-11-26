@@ -44,10 +44,14 @@ async function selectCapture(nextView) {
     const next = await load($('capture').value);
     const previous = await load($('baseline').value);
     if (token !== selection) return;
+    const changed = next !== current;
     current = next; baseline = previous; visible = 60;
     currentId = $('capture').value; baselineId = $('baseline').value;
-    if (nextView) view=nextView;
-    if (!baseline && view === 'changes') view='violations';
+    if (nextView === 'changes' && baseline) view='changes';
+    else if (current && (changed || view === 'changes' || nextView === 'default')) {
+      const summary=receiptSummary(current);
+      view=summary.violations === 0 && summary.review > 0 ? 'incomplete' : 'violations';
+    }
     render();
     if (current) status(store.get(currentId)?.imported ? 'Imported report. Its contents stay in this tab.' : 'Published axe-core check. Use the report date to inspect another capture.');
   } catch (error) {
@@ -134,7 +138,7 @@ function renderFindings() {
 }
 $('capture').addEventListener('change', () => { baselineOptions(); selectCapture(); });
 $('baseline').addEventListener('change', () => {
-  selectCapture($('baseline').value ? 'changes' : 'violations');
+  selectCapture($('baseline').value ? 'changes' : 'default');
 });
 for (const id of ['page-filter','impact-filter','search']) $(id).addEventListener(id === 'search' ? 'input' : 'change', () => { visible = 60; renderFindings(); });
 for (const button of document.querySelectorAll('[data-view]')) button.addEventListener('click', () => { view = button.dataset.view; visible = 60; renderFindings(); });
