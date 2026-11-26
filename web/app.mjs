@@ -38,7 +38,7 @@ async function load(id) {
   }
   return entry.receipt;
 }
-async function selectCapture() {
+async function selectCapture(nextView) {
   const token = ++selection;
   try {
     const next = await load($('capture').value);
@@ -46,8 +46,10 @@ async function selectCapture() {
     if (token !== selection) return;
     current = next; baseline = previous; visible = 60;
     currentId = $('capture').value; baselineId = $('baseline').value;
+    if (nextView) view=nextView;
+    if (!baseline && view === 'changes') view='violations';
     render();
-    if (current) status(`${store.get($('capture').value)?.imported ? 'Imported locally.' : 'Published capture loaded.'} ${receiptSummary(current).checked} of ${current.pages.length} pages checked. Imports are never uploaded.`);
+    if (current) status(store.get(currentId)?.imported ? 'Imported report. Its contents stay in this tab.' : 'Published axe-core check. Use the report date to inspect another capture.');
   } catch (error) {
     if (token !== selection) return;
     if (currentId) { $('capture').value = currentId; baselineOptions(); $('baseline').value = baselineId; }
@@ -74,6 +76,7 @@ function renderScope() {
   $('profile').textContent = profile ? `${profile.browser} · ${profile.viewport.width} × ${profile.viewport.height}px · rendered document · ${profile.settleMilliseconds}ms settle time · up to ${profile.requestLimit} read requests. Rule tags: ${profile.tags.join(', ')}.` : 'This imported report has no complete capture profile. Findings can be inspected, but introduced/resolved comparisons are unavailable.';
 }
 function render() {
+  $('read-findings').hidden = !current;
   $('loaded').hidden = !current; $('empty').hidden = Boolean(current);
   $('save-json').disabled = !current; $('save-csv').disabled = !current;
   if (!current) return;
@@ -130,7 +133,9 @@ function renderFindings() {
   $('show-more').textContent = `Show more findings (${rows.length - visible} remaining)`;
 }
 $('capture').addEventListener('change', () => { baselineOptions(); selectCapture(); });
-$('baseline').addEventListener('change', selectCapture);
+$('baseline').addEventListener('change', () => {
+  selectCapture($('baseline').value ? 'changes' : 'violations');
+});
 for (const id of ['page-filter','impact-filter','search']) $(id).addEventListener(id === 'search' ? 'input' : 'change', () => { visible = 60; renderFindings(); });
 for (const button of document.querySelectorAll('[data-view]')) button.addEventListener('click', () => { view = button.dataset.view; visible = 60; renderFindings(); });
 $('show-more').addEventListener('click', () => { visible += 60; renderFindings(); });

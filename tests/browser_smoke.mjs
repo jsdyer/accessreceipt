@@ -34,10 +34,13 @@ try {
     await page.goto(base,{waitUntil:'networkidle'});
     await page.locator('#loaded').waitFor({state:'visible'});
     assert.equal(await page.locator('#violations').textContent(),'2');
+    assert.equal(await page.locator('#capture').inputValue(),'captures/current.json');
+    assert.ok((await page.locator('#capture').boundingBox()).y < height);
+    assert.ok((await page.locator('#violations').boundingBox()).y < height);
     assert.match(await page.locator('#summary-explanation').textContent(), /2 flagged element locations across 2 rule types/);
     assert.match(await page.locator('#summary-explanation').textContent(), /not confirmed failures/);
     await page.locator('#baseline').selectOption('captures/previous.json');
-    await page.getByRole('button',{name:'Changes',exact:true}).click();
+    await page.waitForFunction(()=>document.getElementById('tab-changes').getAttribute('aria-pressed')==='true');
     await page.getByText('Introduced',{exact:true}).waitFor();
     assert.equal(await page.locator('#finding-list .finding-card').count(),2);
     await page.locator('#search').fill('button');assert.equal(await page.locator('#finding-list .finding-card').count(),1);

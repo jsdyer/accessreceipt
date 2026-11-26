@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="{{DESCRIPTION}}"><meta name="theme-color" content="#193c3c">
-  <title>Website Accessibility Report Comparison · CoolCode</title><link rel="stylesheet" href="./style.css?v=counts-3">
+  <title>Website Accessibility Report Comparison · CoolCode</title><link rel="stylesheet" href="./style.css?v=first-report">
 <meta name="application-name" content="{{TITLE}}">
 <link rel="canonical" href="https://coolcode.ca/accessreceipt/">
 </head>
@@ -12,25 +12,21 @@
 <header class="topbar"><a class="brand" href="https://coolcode.ca/">CoolCode<span>.ca</span></a><nav aria-label="Page"><a href="#method">How to read a receipt</a><a href="{{SOURCE_URL}}">Source ↗</a></nav></header>
 <main>
 <section class="hero" aria-labelledby="title">
-  <div><p class="eyebrow"><span class="dot"></span> Evidence / Accessibility</p><h1 id="title">Access<br><em>Receipt.</em></h1><p class="intro">Make accessibility changes visible.<br>Inspect a dated check. Compare the evidence. Keep a copy.</p></div>
-  <aside class="receipt-note"><div class="paper-label">A check, with context</div><div class="ledger-line"><span>Engine</span><strong>axe-core</strong></div><div class="ledger-line"><span>Collection</span><strong>Weekly + on demand</strong></div><div class="ledger-line"><span>Coverage</span><strong>Public, rendered pages</strong></div><p>Automated checks find some barriers. Keyboard, screen-reader and human review still matter.</p><div class="perforation"></div><span class="smallcap">No overall grade. Follow the findings.</span></aside>
-</section>
-<section class="toolbar" aria-labelledby="load-title">
-  <div><h2 id="load-title">Bring your own evidence</h2><p>Open an axe-core JSON report or a saved receipt. Imported files stay in this tab.</p></div>
-  <div class="toolbar-actions"><label class="button primary" for="import-file">Import report <span aria-hidden="true">↑</span></label><input id="import-file" class="file-input" type="file" accept=".json,application/json"><a class="button" href="https://github.com/jsdyer/accessreceipt/actions/workflows/pages.yml">Run owner’s check ↗</a></div>
+  <h1 id="title">Access <em>Receipt.</em></h1><p class="intro">See which page elements an automated accessibility check flagged. Choose a dated report or compare it with an earlier check.</p>
+  <p class="report-links"><span id="read-findings" hidden><a href="#results-title">Read findings</a> · </span><a href="#import-report">Import your own report</a></p>
 </section>
 <p id="status" class="status" role="status" aria-live="polite">Loading published captures…</p>
 <section id="workspace" tabindex="-1" aria-label="Accessibility receipt workspace">
-<div class="capture-controls"><div><label for="capture">Current capture</label><select id="capture"><option value="">No capture selected</option></select></div><div><label for="baseline">Compare with an earlier capture</label><select id="baseline"><option value="">No comparison</option></select></div><div class="exports"><button id="save-json" disabled>Save receipt ↓</button><button id="save-csv" disabled>Export findings CSV ↓</button></div></div>
-<div id="empty" class="empty" hidden><span class="empty-number">01</span><h2>Start a record worth keeping.</h2><p>No published capture is available yet. Import an axe-core JSON report to inspect it immediately, or run the owner’s check to capture configured pages.</p><p>Future captures will let you compare the same page, engine and check profile.</p></div>
+<div class="capture-controls"><div><label for="capture">Report date (UTC)</label><select id="capture"><option value="">No capture selected</option></select></div><div><label for="baseline">Compare with an earlier report</label><select id="baseline"><option value="">No comparison</option></select></div></div>
+<div id="empty" class="empty" hidden><h2>No published reports yet</h2><p>No published capture is available yet. Import an axe-core JSON report to inspect it immediately, or run the owner’s check to capture configured pages.</p><p>Future captures will let you compare the same page, engine and check profile.</p></div>
 <div id="loaded" hidden>
   <div class="summary-grid" aria-label="Capture summary"><div><span id="checked">—</span><p>pages checked</p></div><div><span id="violations">—</span><p>flagged element locations</p></div><div><span id="review">—</span><p>locations needing review</p></div><div><span id="rules">—</span><p>rule types flagged</p></div></div>
-  <p id="summary-explanation" class="summary-explanation"></p>
+  <p id="summary-explanation" class="summary-explanation"></p><div class="exports"><button id="save-json" disabled>Save receipt ↓</button><button id="save-csv" disabled>Export findings CSV ↓</button></div>
   <div class="capture-line"><p id="capture-meta"></p><span class="pill">Automated evidence</span></div>
   <div class="workspace-grid">
-    <aside class="scope"><p class="eyebrow">01 / Page coverage</p><h2>Checked pages</h2><div id="page-list"></div><details><summary>Check profile</summary><p id="profile"></p></details><p class="aside-note">A page that failed to load is unassessed. It is never counted as having passed.</p></aside>
+    <aside class="scope"><h2>Checked pages</h2><div id="page-list"></div><details><summary>Check profile</summary><p id="profile"></p></details><p class="aside-note">A page that failed to load is unassessed. It is never counted as having passed.</p></aside>
     <div class="results">
-      <div class="result-heading"><div><p class="eyebrow">02 / The evidence</p><h2 id="results-title">What needs attention</h2></div><span id="result-count" class="pill"></span></div>
+      <div class="result-heading"><div><h2 id="results-title" tabindex="-1">What needs attention</h2></div><span id="result-count" class="pill"></span></div>
       <div class="tabs" role="group" aria-label="Finding category"><button class="selected" id="tab-violations" data-view="violations" aria-pressed="true">Findings</button><button id="tab-incomplete" data-view="incomplete" aria-pressed="false">Needs review</button><button id="tab-changes" data-view="changes" aria-pressed="false">Changes</button></div>
       <div class="filters"><div><label for="page-filter">Page</label><select id="page-filter"><option value="">All pages</option></select></div><div><label for="impact-filter">Impact</label><select id="impact-filter"><option value="">All impacts</option><option>critical</option><option>serious</option><option>moderate</option><option>minor</option><option>unknown</option></select></div><div><label for="search">Find a rule or element</label><input id="search" type="search" placeholder="Contrast, heading, button…"></div></div>
       <div id="comparison-note" class="notice" hidden></div><div id="finding-list"></div><button id="show-more" class="more" hidden>Show more findings</button>
@@ -38,8 +34,12 @@
   </div>
 </div>
 </section>
-<section id="method" class="method"><p class="eyebrow">Read the receipt</p><h2>A finding is the beginning<br>of an investigation.</h2><div class="method-grid"><article><span>01</span><h3>Same page, same check</h3><p>Changes compare the same requested and final URL, axe version, browser, viewport and rules. Missing pages, incomplete resource loads and incompatible profiles stay unassessed. A changed element selector may appear as one resolved and one introduced finding.</p></article><article><span>02</span><h3>Understand the categories</h3><p>Findings are automated rule failures. “Needs review” means axe could not decide. Best-practice tags are distinct from WCAG criteria. Neither zero findings nor a resolved item proves conformance.</p></article><article><span>03</span><h3>Keep the useful evidence</h3><p>Receipts contain rule names, impacts, WCAG tags and element selectors. Published captures omit raw HTML and check payloads. Selectors can contain public attribute values. Imports stay in memory until you close or reload this page; use Save receipt to keep them.</p></article></div><div class="source-links"><a href="https://github.com/jsdyer/accessreceipt#add-or-change-pages">Add pages to the collection ↗</a><a href="https://github.com/dequelabs/axe-core/blob/develop/doc/API.md">axe-core documentation ↗</a><a href="https://www.w3.org/WAI/test-evaluate/">W3C evaluation guidance ↗</a></div></section>
+<section id="import-report" class="toolbar" aria-labelledby="load-title">
+  <div><h2 id="load-title">Import your own report</h2><p>Open an axe-core JSON report or a saved receipt. Imported files stay in this tab.</p></div>
+  <div class="toolbar-actions"><label class="button primary" for="import-file">Import report <span aria-hidden="true">↑</span></label><input id="import-file" class="file-input" type="file" accept=".json,application/json"><a class="button" href="https://github.com/jsdyer/accessreceipt/actions/workflows/pages.yml">Run owner’s check ↗</a></div>
+</section>
+<section id="method" class="method"><p class="eyebrow">Read the receipt</p><h2>What an automated check covers</h2><p>Weekly and on-demand axe-core checks cover the rendered public pages listed in the report. Keyboard, screen-reader and human testing can reveal other barriers.</p><div class="method-grid"><article><span>01</span><h3>Same page, same check</h3><p>Changes compare the same requested and final URL, axe version, browser, viewport and rules. Missing pages, incomplete resource loads and incompatible profiles stay unassessed. A changed element selector may appear as one resolved and one introduced finding.</p></article><article><span>02</span><h3>Understand the categories</h3><p>Findings are automated rule failures. “Needs review” means axe could not decide. Best-practice tags are distinct from WCAG criteria. Neither zero findings nor a resolved item proves conformance.</p></article><article><span>03</span><h3>Keep the useful evidence</h3><p>Receipts contain rule names, impacts, WCAG tags and element selectors. Published captures omit raw HTML and check payloads. Selectors can contain public attribute values. Imports stay in memory until you close or reload this page; use Save receipt to keep them.</p></article></div><div class="source-links"><a href="https://github.com/jsdyer/accessreceipt#add-or-change-pages">Add pages to the collection ↗</a><a href="https://github.com/dequelabs/axe-core/blob/develop/doc/API.md">axe-core documentation ↗</a><a href="https://www.w3.org/WAI/test-evaluate/">W3C evaluation guidance ↗</a></div></section>
 </main>
 <footer><a class="brand" href="https://coolcode.ca/">CoolCode<span>.ca</span></a><p>Evidence you can inspect. History you can keep.</p>{{ISSUE_LINK}}</footer>
-<script type="module" src="./app.mjs?v=counts-3"></script>{{VISIT_COUNTER}}
+<script type="module" src="./app.mjs?v=first-report"></script>{{VISIT_COUNTER}}
 </body></html>
